@@ -19,11 +19,10 @@ RUN curl https://goldsky.com > goldsky_script.sh && sh goldsky_script.sh -f
 
 # Set up Goldsky token
 ARG GOLDSKY_TOKEN
+ENV GOLDSKY_TOKEN=${GOLDSKY_TOKEN}
 
 # Login to goldsky
-RUN echo ${GOLDSKY_TOKEN}
-RUN echo $GOLDSKY_TOKEN
-RUN goldsky login --token ${GOLDSKY_TOKEN}
+RUN goldsky login --token "$GOLDSKY_TOKEN"
 
 # Builds the TypeScript code into JavaScript.
 RUN npm run build
