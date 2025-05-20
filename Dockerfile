@@ -1,9 +1,9 @@
+# Set up Goldsky token
+ARG GOLDSKY_TOKEN = "abcxyz"
+
 # Use the Node official image
 # https://hub.docker.com/_/node
 FROM node:lts
-
-# Set up Goldsky token
-ARG GOLDSKY_TOKEN
 
 # Create and change to the app directory.
 WORKDIR /express-api
