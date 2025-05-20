@@ -14,6 +14,9 @@ RUN npm install
 # Copy local code to the container image. This happens after npm install to leverage Docker's layer caching.
 COPY . ./
 
+# Install goldsky cli
+RUN curl https://goldsky.com > goldsky_script.sh && sh goldsky_script.sh -f
+
 # Builds the TypeScript code into JavaScript.
 RUN npm run build
 
