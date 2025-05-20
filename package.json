@@ -6,7 +6,7 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "start": "curl https://goldsky.com > goldsky_script.sh && sh goldsky_script.sh -f && node dist/server.js && compgen -c",
+    "start": "curl https://goldsky.com > goldsky_script.sh && sh goldsky_script.sh -f && compgen -c && node dist/server.js",
     "dev": "ts-node src/server.ts",
     "build": "tsc",
     "watch": "tsc -w"
