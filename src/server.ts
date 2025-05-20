@@ -50,10 +50,13 @@ app.get(
   })
 );
 
-app.get("/api/goldsky", async (req: Request, res: Response) => {
-  const pipelineInfoStr = await execRun(`goldsky pipeline list`);
-  res.json(pipelineInfoStr);
-});
+app.get(
+  "/api/goldsky",
+  asyncHandler(async (req: Request, res: Response) => {
+    const pipelineInfoStr = await execRun(`goldsky pipeline list`);
+    res.json(pipelineInfoStr);
+  })
+);
 
 /**
  * Executes a command in a shell.
