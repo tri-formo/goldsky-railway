@@ -1,5 +1,7 @@
 import { exec } from "child_process";
 import express, { Request, Response } from "express";
+import { asyncHandler, errorHandler, notFound } from "./errors/errorHandler";
+import { AppError } from "./errors/AppError";
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -7,19 +9,46 @@ const port = process.env.PORT || 8080;
 // Middleware
 app.use(express.json());
 
+// Example of async route with error handling
+const asyncExample = async (req: Request, res: Response) => {
+  // Simulate an async operation that might fail
+  const result = await Promise.resolve("Success");
+  if (!result) {
+    throw new AppError("Operation failed", 400);
+  }
+  res.json({ message: result });
+};
+
 // Routes
 app.get("/", (req: Request, res: Response) => {
   res.json({ message: "Welcome to the Express TypeScript API" });
 });
 
-// Example API routes
-app.get("/api/hello", (req: Request, res: Response) => {
-  res.json({ message: "Hello, World!" });
-});
+// Example API routes with async error handling
+app.get(
+  "/api/hello",
+  asyncHandler(async (req: Request, res: Response) => {
+    res.json({ message: "Hello, World!" });
+  })
+);
 
-app.post("/api/echo", (req: Request, res: Response) => {
-  res.json({ received: req.body });
-});
+app.post(
+  "/api/echo",
+  asyncHandler(async (req: Request, res: Response) => {
+    if (!req.body) {
+      throw new AppError("No data provided", 400);
+    }
+    res.json({ received: req.body });
+  })
+);
+
+// Example route that might throw an error
+app.get(
+  "/api/error-example",
+  asyncHandler(async (req: Request, res: Response) => {
+    throw new AppError("This is a test error", 400);
+  })
+);
 
 app.get("/api/goldsky", async (req: Request, res: Response) => {
   const pipelineInfoStr = await execRun(`goldsky pipeline list`);
@@ -40,6 +69,10 @@ const execRun = (cmd: string): Promise<string> => {
     });
   });
 };
+
+// Error handling middleware
+app.use(notFound);
+app.use(errorHandler);
 
 // Start server
 app.listen(port, () => {
