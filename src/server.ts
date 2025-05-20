@@ -20,6 +20,10 @@ app.post("/api/echo", (req: Request, res: Response) => {
   res.json({ received: req.body });
 });
 
+app.post("/api/goldsky", (req: Request, res: Response) => {
+  res.json("test goldsky");
+});
+
 // Start server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
