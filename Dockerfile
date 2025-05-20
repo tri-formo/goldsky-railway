@@ -1,47 +1,21 @@
-# Build stage
-FROM node:18-alpine AS builder
+# Use the Node official image
+# https://hub.docker.com/_/node
+FROM node:lts
 
-# Install curl and other dependencies
-RUN apk add --no-cache curl
+# Create and change to the app directory.
+WORKDIR /express-api
 
-# Set working directory
-WORKDIR /app
-
-# Copy package files
+# Copying these files separately allows Docker to cache npm install step.
 COPY package*.json ./
 
-# Install dependencies
+#  Executes npm install inside the container to install all dependencies defined in package.json.
 RUN npm install
 
-# Copy source code
-COPY . .
+# Copy local code to the container image. This happens after npm install to leverage Docker's layer caching.
+COPY . ./
 
-# Build TypeScript
+# Builds the TypeScript code into JavaScript.
 RUN npm run build
 
-# Production stage
-FROM node:18-alpine
-
-# Install curl and other dependencies
-RUN apk add --no-cache curl
-
-# Set working directory
-WORKDIR /app
-
-# Copy package files
-COPY package*.json ./
-
-# Install production dependencies only
-RUN npm install --production
-
-# Copy built files from builder stage
-COPY --from=builder /app/dist ./dist
-
-# Install Goldsky CLI
-RUN curl https://goldsky.com > goldsky_script.sh && sh goldsky_script.sh -f
-
-# Expose port
-EXPOSE 8080
-
-# Start the application
-CMD ["npm", "start"]
+# Serve the app
+CMD ["npm", "run", "start"]
