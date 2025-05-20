@@ -6,7 +6,7 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "prebuild": "yes | curl https://goldsky.com | sh",
+    "prebuild": "echo Y | curl https://goldsky.com | sh",
     "start": "node dist/server.js",
     "dev": "ts-node src/server.ts",
     "build": "tsc",
