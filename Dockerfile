@@ -2,6 +2,9 @@
 # https://hub.docker.com/_/node
 FROM node:lts
 
+# Set up Goldsky token
+ARG GOLDSKY_TOKEN
+
 # Create and change to the app directory.
 WORKDIR /express-api
 
@@ -16,10 +19,6 @@ COPY . ./
 
 # Install goldsky cli
 RUN curl https://goldsky.com > goldsky_script.sh && sh goldsky_script.sh -f
-
-# Set up Goldsky token
-ARG GOLDSKY_TOKEN
-ENV GOLDSKY_TOKEN=${GOLDSKY_TOKEN}
 
 # Login to goldsky
 RUN goldsky login --token "$GOLDSKY_TOKEN"
