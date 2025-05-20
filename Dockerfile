@@ -1,5 +1,5 @@
 # Set up Goldsky token
-ARG GOLDSKY_TOKEN = "abcxyz"
+ARG GOLDSKY_TOKEN="abcxyz"
 
 # Use the Node official image
 # https://hub.docker.com/_/node
