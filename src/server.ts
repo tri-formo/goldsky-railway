@@ -2,12 +2,14 @@ import { exec } from "child_process";
 import express, { Request, Response } from "express";
 import { asyncHandler, errorHandler, notFound } from "./errors/errorHandler";
 import { AppError } from "./errors/AppError";
+import morgan from "morgan";
 
 const app = express();
 const port = process.env.PORT || 8080;
 
 // Middleware
 app.use(express.json());
+app.use(morgan("combined"));
 
 // Example of async route with error handling
 const asyncExample = async (req: Request, res: Response) => {

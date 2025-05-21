@@ -2,9 +2,6 @@
 # https://hub.docker.com/_/node
 FROM node:lts
 
-# Set up Goldsky token
-ARG GOLDSKY_TOKEN="abc"
-
 # Create and change to the app directory.
 WORKDIR /express-api
 
@@ -20,11 +17,13 @@ COPY . ./
 # Install goldsky cli
 RUN curl https://goldsky.com > goldsky_script.sh && sh goldsky_script.sh -f
 
-# Login to goldsky
-RUN goldsky login --token $GOLDSKY_TOKEN
-
 # Builds the TypeScript code into JavaScript.
 RUN npm run build
 
-# Serve the app
+# Create entrypoint script
+RUN echo '#!/bin/sh\n\
+sh /express-api/scripts/login-goldsky.sh\n\
+exec "$@"' > /entrypoint.sh && chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["npm", "run", "start"]
