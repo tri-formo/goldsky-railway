@@ -22,7 +22,7 @@ RUN echo "hi hi hi"
 RUN curl https://goldsky.com > goldsky_script.sh && sh goldsky_script.sh -f
 
 # Login to goldsky
-RUN goldsky login --token %{GOLDSKY_TOKEN}
+# RUN goldsky login --token %{GOLDSKY_TOKEN}
 
 # Builds the TypeScript code into JavaScript.
 RUN npm run build
