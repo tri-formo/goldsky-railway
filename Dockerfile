@@ -1,5 +1,3 @@
-ENV NODE_ENV="production"
-
 # Use the Node official image
 # https://hub.docker.com/_/node
 FROM node:lts
@@ -27,5 +25,11 @@ RUN echo '#!/bin/sh\n\
 sh /express-api/scripts/login-goldsky.sh\n\
 exec "$@"' > /entrypoint.sh && chmod +x /entrypoint.sh
 
+# Set environment variables
+ENV NODE_ENV="production"
+
+# Run the entrypoint script
 ENTRYPOINT ["/entrypoint.sh"]
+
+# Run the start script
 CMD ["npm", "run", "start"]
