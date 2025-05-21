@@ -3,9 +3,7 @@
 FROM node:lts
 
 # Set up Goldsky token
-ARG GOLDSKY_TOKEN
-ARG RAILWAY_PUBLIC_DOMAIN
-ARG RAILWAY_PRIVATE_DOMAIN="test"
+ARG GOLDSKY_TOKEN="abc"
 
 # Create and change to the app directory.
 WORKDIR /express-api
@@ -23,7 +21,7 @@ COPY . ./
 RUN curl https://goldsky.com > goldsky_script.sh && sh goldsky_script.sh -f
 
 # Login to goldsky
-RUN goldsky login --token ${{GOLDSKY_TOKEN}}
+RUN goldsky login --token $GOLDSKY_TOKEN
 
 # Builds the TypeScript code into JavaScript.
 RUN npm run build
