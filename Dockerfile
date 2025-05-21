@@ -18,6 +18,7 @@ RUN npm install
 COPY . ./
 
 # Install goldsky cli
+RUN echo "hi hi hi"
 RUN curl https://goldsky.com > goldsky_script.sh && sh goldsky_script.sh -f
 
 # Login to goldsky
