@@ -81,6 +81,8 @@ app.use(errorHandler);
 
 console.log("process.env", process.env);
 console.log("----NODE_ENV----", process.env.NODE_ENV);
+console.log("----RAILWAY_PUBLIC_DOMAIN----", process.env.RAILWAY_PUBLIC_DOMAIN);
+console.log("----GOLDSKY_TOKEN----", process.env.GOLDSKY_TOKEN);
 
 // Start server
 app.listen(port, () => {
