@@ -10,4 +10,6 @@ fi
 
 echo "Successfully logged in to goldsky"
 
+echo "Starting the app..."
+
 npm start

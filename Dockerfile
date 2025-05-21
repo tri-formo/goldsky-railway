@@ -15,7 +15,7 @@ RUN npm install
 COPY . ./
 
 # Install goldsky cli
-RUN curl https://goldsky.com > goldsky_script.sh && sh goldsky_script.sh -f
+RUN curl https://goldsky.com > install_goldsky_cli.sh && sh install_goldsky_cli.sh -f
 
 # Builds the TypeScript code into JavaScript.
 RUN npm run build
