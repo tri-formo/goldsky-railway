@@ -1,7 +1,7 @@
 # Set up Goldsky token
 ARG GOLDSKY_TOKEN="abcxyz"
 ARG RAILWAY_PUBLIC_DOMAIN
-ARG RAILWAY_PRIVATE_DOMAIN ='test'
+ARG RAILWAY_PRIVATE_DOMAIN ="test"
 
 # Use the Node official image
 # https://hub.docker.com/_/node
