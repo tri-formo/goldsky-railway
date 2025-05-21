@@ -9,6 +9,8 @@ const port = process.env.PORT || 8080;
 
 // Middleware
 app.use(express.json());
+
+// Log
 app.use(morgan("combined"));
 
 // Example of async route with error handling
