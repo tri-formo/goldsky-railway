@@ -20,13 +20,8 @@ RUN curl https://goldsky.com > goldsky_script.sh && sh goldsky_script.sh -f
 # Builds the TypeScript code into JavaScript.
 RUN npm run build
 
-# Create entrypoint script
-RUN echo '#!/bin/sh\n\
-sh /express-api/scripts/login-goldsky.sh\n\
-exec "$@"' > /entrypoint.sh && chmod +x /entrypoint.sh
+# Make the run script executable
+RUN chmod +x /express-api/scripts/run.sh
 
-# Run the entrypoint script
-ENTRYPOINT ["/entrypoint.sh"]
-
-# Run the start script
-CMD ["npm", "run", "start"]
+# Run app
+ENTRYPOINT ["/express-api/scripts/run.sh"]
