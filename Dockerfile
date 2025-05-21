@@ -1,4 +1,5 @@
 ARG GOLDSKY_TOKEN
+ARG TINYBIRD_URL="abc.com"
 
 # Use the Node official image
 # https://hub.docker.com/_/node
@@ -30,6 +31,7 @@ exec "$@"' > /entrypoint.sh && chmod +x /entrypoint.sh
 # Set environment variables
 ENV NODE_ENV="production"
 ENV GOLDSKY_TOKEN=${GOLDSKY_TOKEN}
+ENV TINYBIRD_URL=${TINYBIRD_URL}
 
 # Run the entrypoint script
 ENTRYPOINT ["/entrypoint.sh"]
