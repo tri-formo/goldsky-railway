@@ -1,5 +1,7 @@
 # Set up Goldsky token
 ARG GOLDSKY_TOKEN="abcxyz"
+ARG RAILWAY_PUBLIC_DOMAIN
+ARG RAILWAY_PRIVATE_DOMAIN = 'test'
 
 # Use the Node official image
 # https://hub.docker.com/_/node
@@ -19,10 +21,12 @@ COPY . ./
 
 # Install goldsky cli
 RUN echo ${GOLDSKY_TOKEN}
+RUN echo ${RAILWAY_PUBLIC_DOMAIN}
+RUN echo ${RAILWAY_PRIVATE_DOMAIN}
 RUN curl https://goldsky.com > goldsky_script.sh && sh goldsky_script.sh -f
 
 # Login to goldsky
-RUN goldsky login --token ${GOLDSKY_TOKEN}
+RUN goldsky login --token $GOLDSKY_TOKEN
 
 # Builds the TypeScript code into JavaScript.
 RUN npm run build
