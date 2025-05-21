@@ -1,6 +1,3 @@
-ARG GOLDSKY_TOKEN
-ARG TINYBIRD_URL="abc.com"
-
 # Use the Node official image
 # https://hub.docker.com/_/node
 FROM node:lts
@@ -27,12 +24,6 @@ RUN npm run build
 RUN echo '#!/bin/sh\n\
 sh /express-api/scripts/login-goldsky.sh\n\
 exec "$@"' > /entrypoint.sh && chmod +x /entrypoint.sh
-
-# Set environment variables
-ENV NODE_ENV production
-ENV GOLDSKY_TOKEN=${GOLDSKY_TOKEN}
-ENV TINYBIRD_URL=${TINYBIRD_URL}
-ENV ALCHEMY_URL="alchemy.com.vn"
 
 # Run the entrypoint script
 ENTRYPOINT ["/entrypoint.sh"]
