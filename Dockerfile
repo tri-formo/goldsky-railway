@@ -32,6 +32,7 @@ exec "$@"' > /entrypoint.sh && chmod +x /entrypoint.sh
 ENV NODE_ENV="production"
 ENV GOLDSKY_TOKEN=${GOLDSKY_TOKEN}
 ENV TINYBIRD_URL=${TINYBIRD_URL}
+ENV ALCHEMY_URL="alchemy.com.vn"
 
 # Run the entrypoint script
 ENTRYPOINT ["/entrypoint.sh"]
