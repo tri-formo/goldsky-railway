@@ -79,6 +79,9 @@ const execRun = (cmd: string): Promise<string> => {
 app.use(notFound);
 app.use(errorHandler);
 
+console.log("process.env", process.env);
+console.log("----NODE_ENV----", process.env.NODE_ENV);
+
 // Start server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
