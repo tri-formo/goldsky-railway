@@ -3,6 +3,10 @@ import express, { Request, Response } from "express";
 import { asyncHandler, errorHandler, notFound } from "./errors/errorHandler";
 import { AppError } from "./errors/AppError";
 import morgan from "morgan";
+import dotenv from "dotenv";
+
+// Load environment variables
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 8080;
