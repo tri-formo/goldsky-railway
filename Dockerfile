@@ -1,3 +1,5 @@
+ENV NODE_ENV production
+
 # Use the Node official image
 # https://hub.docker.com/_/node
 FROM node:lts
