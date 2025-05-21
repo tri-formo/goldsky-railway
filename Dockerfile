@@ -1,3 +1,5 @@
+ARG GOLDSKY_TOKEN
+
 # Use the Node official image
 # https://hub.docker.com/_/node
 FROM node:lts
@@ -27,6 +29,7 @@ exec "$@"' > /entrypoint.sh && chmod +x /entrypoint.sh
 
 # Set environment variables
 ENV NODE_ENV="production"
+ENV GOLDSKY_TOKEN=${GOLDSKY_TOKEN}
 
 # Run the entrypoint script
 ENTRYPOINT ["/entrypoint.sh"]
